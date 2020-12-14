@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Card matching</title>
+        <link rel="stylesheet" type="text/css" href="../index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+        <div class="naslov">
+            <h1>Card matching</h1>
+        </div>
+        <div class="login_form" id="login">
+            <p>Username: <input v-model="user"/></p>
+            <p>Password: <input v-model="pass" type="password"/></p>
+            <div class="button_row">
+                <button class="button" v-on:click="loginGoogle">
+                    Log in with Google
+                </button>
+                <button class="button" v-on:click="executeLogin">
+                    Log in
+                </button>
+            </div>
+        </div>
+    </body>
+    <script src="../main.js"></script>
+</html>
