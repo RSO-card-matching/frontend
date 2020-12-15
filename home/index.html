@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Card matching</title>
+        <link rel="stylesheet" type="text/css" href="../index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+        <div class="naslov">
+            <h1 onclick="location.href='..';"">Card matching</h1>
+        </div>
+        <div class="navigation_row">
+            <button class="navigation_element superbold">
+                HOME
+            </button>
+            <button class="navigation_element" onclick="location.href='../mycards';">
+                MY CARDS
+            </button>
+            <button class="navigation_element" onclick="location.href='../allcards';">
+                ALL CARDS
+            </button>
+            <button class="navigation_element">
+                MATCHES
+            </button>
+            <button class="navigation_element">
+                MESSAGES
+            </button>
+            <button class="navigation_element">
+                LOG OUT
+            </button>
+        </div>
+        <ul class="home_dash">
+            <button class="home_item">
+                <p class="home_legend">Total cards</p>
+                <p class="home_value">147</p>
+            </button>
+            <button class="home_item">
+                <p class="home_legend">New matches</p>
+                <p class="home_value">0</p>
+            </button>
+            <button class="home_item">
+                <p class="home_legend">Unread messages</p>
+                <p class="home_value">7</p>
+            </button>
+        </ul>
+    </body>
+</html>
