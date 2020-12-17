@@ -1,0 +1,19 @@
+name: publish website to web host
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Push using SFTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: {{ secrets.FRONTEND_URL }}
+        username: {{ secrets.FRONTEND_UNAME }}
+        password: {{ secrets.FRONTEND_PASS }}
+        local-dir: ./www/
+        server-dir: www/
