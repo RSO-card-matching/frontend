@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<h1 style="text-align: center">Register user</h1>
+<form action="http://34.78.142.176:8080/v1/users" method="post" style="text-align: center;">
+    <label style="color: white">Username</label>
+    <input type="text" name="username" placeholder="username"
+           required="required"/>
+    <br>
+    <label style="color: white">Password</label>
+    <input type="password" name="pass" placeholder="Password"
+           required="required"/>
+    <br>
+    <label style="color: white">Email</label>
+    <input type="email" name="email" placeholder="email"
+           required="required"/>
+    <br>
+    <label style="color: white">Full name</label>
+    <input type="text" name="fullName" placeholder="Full name"
+           required="required"/>
+    <br>
+    <input type="submit" name="submit" value="Login"/>
+</form>
+
+</body>
+</html>

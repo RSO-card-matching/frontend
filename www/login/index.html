@@ -11,6 +11,18 @@
         <div class="naslov">
             <h1 onclick="location.href='..'"">Card matching</h1>
         </div>
+        <form action="login_check.php" method="post" style="text-align: center;">
+            <label style="color: white">Username</label>
+            <input type="text" name="username" placeholder="username"
+                   required="required"/>
+            <label style="color: white">Password</label>
+            <input type="password" name="pass" placeholder="Password"
+                   required="required"/>
+            <br>
+            <input type="submit" name="submit" value="Login"/>
+        </form>
+
+
         <div class="login_form" id="login">
             <p>Username: <input v-model="user"/></p>
             <p>Password: <input v-model="pass" type="password"/></p>
