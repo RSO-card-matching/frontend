@@ -23,6 +23,23 @@
                 Register
             </button>
         </div>
+
+        <script>fetch("https://covid-193.p.rapidapi.com/statistics?country=Slovenia", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "210c027a81mshb9a569944c9d1a6p1a26d8jsn48237317e333",
+                "x-rapidapi-host": "covid-193.p.rapidapi.com"
+            }
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => {
+                console.error(err);
+            });</script>
     </body>
+
+
     <script src="main.js"></script>
+
 </html>
