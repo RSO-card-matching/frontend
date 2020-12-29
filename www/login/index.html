@@ -33,6 +33,7 @@
             headers: {
                 //'Content-Type': 'application/json'
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
             },
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -46,10 +47,10 @@
         const data = new URLSearchParams(formData);
         //const object = Object.fromEntries(formData.entries());
         //console.log(formData);
-        postData("http://34.120.43.240/tokens", data)
+        postData("https://api.cardmatching.ovh/tokens", data)
             .then(json => {
                 setCookie('token', json.data.access_token)
-                window.location = '/';
+                window.location = '../index.html';
             })
             .catch(e => console.error(e));
     })
