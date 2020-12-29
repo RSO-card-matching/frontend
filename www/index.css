@@ -251,6 +251,7 @@ td, th {
     text-align: left;
     padding: 8px;
     color: red;
+    text-align: center;
 }
 
 tr:nth-child(even) {
