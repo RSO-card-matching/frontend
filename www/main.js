@@ -31,3 +31,5 @@ function getCookie(name) {
 }
 
 function deleteCookie(name) { setCookie(name, '', -1); }
+
+const _id = (id) => document.getElementById(id);

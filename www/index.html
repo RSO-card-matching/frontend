@@ -5,7 +5,6 @@
         <title>Card matching</title>
         <link rel="stylesheet" type="text/css" href="index.css">
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
-        <script src="https://unpkg.com/vue@next"></script>
     </head>
     <body>
         <div class="naslov">
@@ -42,9 +41,15 @@
                 <td><div id="recoveredAll"></div></td>
             </tr>
         </table>
+    <p>Welcome user: <span id="username"></span></p>
 
-        <script>
-            fetch("https://covid-193.p.rapidapi.com/statistics?country=Slovenia", {
+
+    </body>
+
+
+    <script src="main.js"></script>
+    <script>
+        fetch("https://covid-193.p.rapidapi.com/statistics?country=Slovenia", {
             "method": "GET",
             "headers": {
                 "x-rapidapi-key": "210c027a81mshb9a569944c9d1a6p1a26d8jsn48237317e333",
@@ -53,29 +58,18 @@
         })
             .then(response => response.json())
             .then(json => {
-                document.getElementById('newCases').innerHTML = json.response[0].cases.new
-                document.getElementById('dateToday').innerHTML = json.response[0].day
-                document.getElementById('deathsToday').innerHTML = json.response[0].deaths.new
-                document.getElementById('recoveredAll').innerHTML = json.response[0].cases.recovered
-                document.getElementById('casesActive').innerHTML = json.response[0].cases.active
-                document.getElementById('casesCritical').innerHTML = json.response[0].cases.critical
+                _id('newCases').innerHTML = json.response[0].cases.new
+                _id('dateToday').innerHTML = json.response[0].day
+                _id('deathsToday').innerHTML = json.response[0].deaths.new
+                _id('recoveredAll').innerHTML = json.response[0].cases.recovered
+                _id('casesActive').innerHTML = json.response[0].cases.active
+                _id('casesCritical').innerHTML = json.response[0].cases.critical
             })
             .catch(err => {
                 console.error(err);
             });
 
-            document.getElementById('nekId').innerHTML = `
-            <div class="cases">
-              ${json.rsponse[0].cases.new}
-            </div>
-            <div class="dateToday">
-              ${json.rsponse[0].day}
-            </div>
-            `;
-        </script>
-    </body>
-
-
-    <script src="main.js"></script>
+        _id('username').innerHTML = getCookie('username')
+    </script>
 
 </html>
