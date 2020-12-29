@@ -237,3 +237,22 @@ ul {
     margin: 0;
     margin-bottom: 5px;
 }
+
+
+/* Table */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    color: red;
+}
+
+tr:nth-child(even) {
+    color: lightcyan;
+}
