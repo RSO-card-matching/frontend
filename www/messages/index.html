@@ -43,11 +43,6 @@
     </button>
 </div>
 
-<div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
-    <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
-
-    </main>
-</div>
 <form id="form-login" name="form-login" method="post" style="text-align: center;">
     <label style="color: white">ID</label>
     <input type="text" name="receiver_id" placeholder="Id of sender"
@@ -58,6 +53,13 @@
     <br>
     <input type="submit" name="submit" value="Send message" />
 </form>
+
+<div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
+    <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
+
+    </main>
+</div>
+
 
 </body>
 
@@ -126,9 +128,10 @@
     document.getElementById('form-login').addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(document.getElementById('form-login'));
-        const data = new URLSearchParams(formData);
+        let data = new URLSearchParams(formData);
         //const object = Object.fromEntries(formData.entries());
         //console.log(formData);
+        data = JSON.stringify(data)
         postData("https://api.cardmatching.ovh/v1/messages", data)
             .then(json => {
 
