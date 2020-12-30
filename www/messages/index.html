@@ -43,6 +43,9 @@
     </button>
 </div>
 
+<p>Welcome user: <span id="username"></span></p>
+<p>Tokenr: <span id="token"></span></p>
+
 <form id="form-login" name="form-login" method="post" style="text-align: center;">
     <label style="color: white">ID</label>
     <input type="text" name="receiver_id" placeholder="Id of sender"
@@ -64,6 +67,8 @@
 </body>
 
 <script>
+    _id('username').innerHTML = getCookie('username')
+    _id('token').innerHTML = getCookie('token')
     if (!getCookie('token')) {
         window.location = "../login";
     }
@@ -124,7 +129,7 @@
         });
         return response.json(); // parses JSON response into native JavaScript objects
     }
-    document.getElementById('form-login').addEventListener('submit', (e) => {
+    _id('form-login').addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(document.getElementById('form-login'));
         const data = JSON.stringify(Object.fromEntries(formData));
