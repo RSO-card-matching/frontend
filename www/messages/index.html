@@ -42,22 +42,23 @@
         LOG OUT
     </button>
 </div>
+<form id="form-login" name="form-login" method="post" style="text-align: center;">
+    <label style="color: white">ID</label>
+    <input type="text" name="receiver_id" placeholder="Id of sender"
+           required="required"/>
+    <label style="color: white">Content</label>
+    <input type="text" name="content" placeholder="content of message"
+           required="required"/>
+    <br>
+    <input type="submit" name="submit" value="Send message" />
+</form>
 <div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
     <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
 
     </main>
 </div>
 
-<form id="form-login" name="form-login" method="post" style="text-align: center;">
-    <label style="color: white">ID</label>
-    <input type="text" name="receiver_id" placeholder="content of message"
-           required="required"/>
-    <label style="color: white">Content</label>
-    <input type="text" name="content" placeholder="content of message"
-           required="required"/>
-    <br>
-    <input type="submit" name="submit" value="Login" />
-</form>
+
 </body>
 
 <script>
@@ -126,7 +127,6 @@
         e.preventDefault();
         const formData = new FormData(document.getElementById('form-login'));
         const data = new URLSearchParams(formData);
-        const id = 1
         //const object = Object.fromEntries(formData.entries());
         //console.log(formData);
         postData("https://api.cardmatching.ovh/v1/messages", data)
