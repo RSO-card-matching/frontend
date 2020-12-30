@@ -1,3 +1,5 @@
+var baseAPI = 'https://api.cardmatching.ovh/';
+
 const Login = {
     data() {
         return {
