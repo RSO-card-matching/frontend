@@ -33,3 +33,14 @@ function getCookie(name) {
 function deleteCookie(name) { setCookie(name, '', -1); }
 
 const _id = (id) => document.getElementById(id);
+
+async function getData(url) {
+    return await fetch(baseAPI + url, {
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+        }
+    }).then(resp => resp.json());
+}

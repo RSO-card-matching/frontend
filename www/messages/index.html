@@ -5,6 +5,18 @@
     <title>Messages</title>
     <link rel="stylesheet" type="text/css" href="../index.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="../main.js"></script>
+    <style>
+        main > div:last-child span  {
+            display: none;
+        }
+
+        /* Give margin-bottom to the message body except the last message */
+        main > div:not(:last-child) p {
+            margin-bottom: 1.5rem;
+        }
+    </style>
     <script src="../main.js"></script>
 </head>
 <body>
@@ -31,36 +43,54 @@
         LOG OUT
     </button>
 </div>
-<div id="getMessages"></div>
+<div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
+    <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
+
+    </main>
+</div>
 </body>
 
 <script>
-    async function getData(url = '', data = {}) {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            //mode: 'no-cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                //'Content-Type': 'application/json'
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${getCookie('token')}`,
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: data // body data type must match "Content-Type" header
-        });
-        console.log(response)
-        return response.json(); // parses JSON response into native JavaScript objects
+    if (!getCookie('token')) {
+        window.location = "../login";
     }
-    document.getElementById('getMessages'){
-        getData("https://api.cardmatching.ovh/v1/messages", data)
-            .then(json => {
-                window.location = '../index.html';
-            })
-            .catch(e => console.error(e));
-    })
+    getData("v1/messages")
+        .then(json => {
+            _id('main-box').innerHTML = json.map(message => `
+    <div class="flex">
+        <div class="flex flex-col mr-4">
+          <div class="relative mb-3">
+            <div class="absolute bottom-0 right-0 p-0.5 -mb-1 -mr-1 bg-white rounded-md">
+              <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 text-gray-700">
+                <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="h-12 w-12 bg-gray-100 rounded-full overflow-hidden">
+              <img src="https://tinyfac.es/data/avatars/A7299C8E-CEFC-47D9-939A-3C8CA0EA4D13-200w.jpeg" class="h-full w-full object-cover">
+            </div>
+          </div>
+          <div class="relative flex-grow flex justify-center">
+            <span class="absolute h-full w-1 bg-gray-200 rounded-full"></span>
+          </div>
+        </div>
+        <div class="flex-grow">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <div class="text-lg font-semibold">Sandra Comper</div>
+                <div class="text-sm text-gray-500">Send on: ${new Date(message.time).toLocaleString('en-US', { hour: 'numeric', hour12: true })}</div>
+              </div>
+              <button class="py-1 px-2 -mr-1 text-gray-400">
+                <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6">
+                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+              </button>
+            </div>
+            <p>${message.content}</p>
+          </div>
+        </div>
+      </div>`);
+        })
+        .catch(e => console.error(e));
 </script>
 </html>
