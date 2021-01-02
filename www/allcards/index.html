@@ -6,6 +6,17 @@
         <link rel="stylesheet" type="text/css" href="../index.css">
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
         <script src="../main.js"></script>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <style>
+            main > div:last-child span  {
+                display: none;
+            }
+
+            /* Give margin-bottom to the message body except the last message */
+            main > div:not(:last-child) p {
+                margin-bottom: 1.5rem;
+            }
+        </style>
     </head>
     <body>
     <div class="naslov">
@@ -68,5 +79,58 @@
                 <p class="allcards_series">ydffbfbfyxcvcxvva</p>
             </li>
         </ul>
+
+    <div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
+        <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
+
+        </main>
+    </div>
     </body>
+<script>
+    _id('username').innerHTML = getCookie('username')
+    _id('token').innerHTML = getCookie('token')
+    getData("v1/cards")
+        .then(json => {
+            _id('main-box').innerHTML = json.map(message => `
+            <div class="flex">
+        <div class="flex flex-col mr-4">
+          <div class="relative mb-3">
+            <div class="absolute bottom-0 right-0 p-0.5 -mb-1 -mr-1 bg-white rounded-md">
+              <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 text-gray-700">
+                <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="h-12 w-12 bg-gray-100 rounded-full overflow-hidden">
+              <img src="https://tinyfac.es/data/avatars/A7299C8E-CEFC-47D9-939A-3C8CA0EA4D13-200w.jpeg" class="h-full w-full object-cover">
+            </div>
+          </div>
+          <div class="relative flex-grow flex justify-center">
+            <span class="absolute h-full w-1 bg-gray-200 rounded-full"></span>
+          </div>
+        </div>
+        <div class="flex-grow">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <div class="text-lg font-semibold text-gray-500">Sandra Comper</div>
+                <div class="text-sm text-gray-500">Send on: ${new Date(message.time).toLocaleString('en-US', {
+                hour: 'numeric',
+                hour12: true
+            })}</div>
+              </div>
+              <button class="py-1 px-2 -mr-1 text-gray-400">
+                <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6">
+                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+              </button>
+            </div>
+            <p style="color: #131D3E">${message.content}</p>
+          </div>
+        </div>
+      </div>\`);
+        })
+        .catch(e => console.error(e));
+</script>
+}
+</script>
 </html>
