@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>All cards</title>
-        <link rel="stylesheet" type="text/css" href="../index.css">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
-        <script src="../main.js"></script>
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <style>
-            main > div:last-child span  {
-                display: none;
-            }
+<head>
+    <meta charset="UTF-8">
+    <title>All cards</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="../main.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        main > div:last-child span  {
+            display: none;
+        }
 
-            /* Give margin-bottom to the message body except the last message */
-            main > div:not(:last-child) p {
-                margin-bottom: 1.5rem;
-            }
-        </style>
-    </head>
-    <body>
-    <div class="naslov">
-        <h1 onclick="location.href='..';"">Card matching</h1>
-    </div>
-    <div class="navigation_row">
-        <button class="navigation_element">
-            HOME
-        </button>
-        <button class="navigation_element" onclick="location.href='../mycards';">
-            MY CARDS
-        </button>
-        <button class="navigation_element superbold" onclick="location.href='../allcards';">
-            ALL CARDS
-        </button>
-        <button class="navigation_element" onclick="location.href='../matches';">
-            MATCHES
-        </button>
-        <button class="navigation_element" onclick="location.href='../messages';">
-            MESSAGES
-        </button>
-        <button class="navigation_element" onclick="location.href='../logout';">
-            LOG OUT
-        </button>
-    </div>
-        <ul class="allcards_gallery">
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">A card</p>
-                <p class="allcards_series">Cardos</p>
-            </li>
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">Another card</p>
-                <p class="allcards_series">Cardos</p>
-            </li>
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">Superfastinsanekebab</p>
-                <p class="allcards_series">Čokolešnik</p>
-            </li>
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">sdkjfnasDF</p>
-                <p class="allcards_series">ASDJHFAOSDJKFASF</p>
-            </li>
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">asdfasdfdvasd</p>
-                <p class="allcards_series">sdfbsdfbsdfbsdfb</p>
-            </li>
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">sdfbsdfbdsfb</p>
-                <p class="allcards_series">ydfbvdfbydfbdfb</p>
-            </li>
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">ydfbfbdfbdyfbydfb</p>
-                <p class="allcards_series">ydffbfbfyxcvcxvva</p>
-            </li>
-        </ul>
+        /* Give margin-bottom to the message body except the last message */
+        main > div:not(:last-child) p {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="naslov">
+    <h1 onclick="location.href='..';"">Card matching</h1>
+</div>
+<div class="navigation_row">
+    <button class="navigation_element">
+        HOME
+    </button>
+    <button class="navigation_element" onclick="location.href='../mycards';">
+        MY CARDS
+    </button>
+    <button class="navigation_element superbold" onclick="location.href='../allcards';">
+        ALL CARDS
+    </button>
+    <button class="navigation_element" onclick="location.href='../matches';">
+        MATCHES
+    </button>
+    <button class="navigation_element" onclick="location.href='../messages';">
+        MESSAGES
+    </button>
+    <button class="navigation_element" onclick="location.href='../logout';">
+        LOG OUT
+    </button>
+</div>
+<ul class="allcards_gallery">
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">A card</p>
+        <p class="allcards_series">Cardos</p>
+    </li>
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">Another card</p>
+        <p class="allcards_series">Cardos</p>
+    </li>
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">Superfastinsanekebab</p>
+        <p class="allcards_series">Čokolešnik</p>
+    </li>
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">sdkjfnasDF</p>
+        <p class="allcards_series">ASDJHFAOSDJKFASF</p>
+    </li>
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">asdfasdfdvasd</p>
+        <p class="allcards_series">sdfbsdfbsdfbsdfb</p>
+    </li>
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">sdfbsdfbdsfb</p>
+        <p class="allcards_series">ydfbvdfbydfbdfb</p>
+    </li>
+    <li class="allcards_item">
+        <img class="allcards_thumb" src="placeholder-card-200.png"/>
+        <p class="allcards_title">ydfbfbdfbdyfbydfb</p>
+        <p class="allcards_series">ydffbfbfyxcvcxvva</p>
+    </li>
+</ul>
 
-    <div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
-        <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
+<div class="flex items-center justify-center p-16 text-gray-900 bg-gray-200 min-h-screen">
+    <main id="main-box" class="p-8 space-y-3 max-w-xl w-full bg-white rounded-lg shadow-lg">
 
-        </main>
-    </div>
-    </body>
+    </main>
+</div>
+</body>
 <script>
     _id('username').innerHTML = getCookie('username')
     _id('token').innerHTML = getCookie('token')
@@ -127,10 +127,8 @@
             <p style="color: #131D3E">${message.content}</p>
           </div>
         </div>
-      </div>\`);
+            </div>`);
         })
         .catch(e => console.error(e));
-</script>
-}
 </script>
 </html>
