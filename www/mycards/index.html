@@ -15,7 +15,7 @@
     <button class="navigation_element" onclick="location.href='../home';">
         HOME
     </button>
-    <button class="navigation_element superbold">
+    <button class="navigation_element superbold" onclick="location.href='../mycards';">
         MY CARDS
     </button>
     <button class="navigation_element" onclick="location.href='../allcards';">
@@ -36,16 +36,30 @@
 </ul>
 </body>
 <script>
-    getData("v1/samples?user_id=" + getCookie('uid'))
-        .then(json => {
-            _id('my-cards').innerHTML = json.map(object => `
+    function displayCardsData(json) {
+        _id('my-cards').innerHTML = json.map(object => `
             <li class="mycards_item">
-                <p class="mycards_title">${object.state}</p>
-                <p class="mycards_series">Čokolešnik</p>
+                <p class="mycards_title">${object.title}</p>
+                <p class="mycards_series">${object.series}</p>
                 <p class="mycards_state">${object.state}</p>
                 <p class="mycards_wts">WTS: ${object.wts}</p>
             </li>`);
-        })
-        .catch(e => console.error(e));
+    }
+    getData("v1/samples?user_id=" + getCookie('uid'))
+        .then(json => {
+            const cardIds = json.map(object => object.card_id);
+            const stringIds = cardIds.join(',');
+            getData("v1/cards/" + stringIds)
+                .then(cards => {
+                    const mergeJson = [...json.map(object => {
+                        return {
+                            ...object,
+                            ...cards.find(obj => obj.id === object.card_id)
+                        }
+                    })];
+                    console.log(json, cards);
+                    displayCardsData(mergeJson)
+                });
+        });
 </script>
 </html>

@@ -44,7 +44,13 @@ async function getData(url) {
             'Accept': 'application/json',
             'Authorization': `Bearer ${getCookie('token')}`,
         }
-    }).then(resp => resp.json());
+    }).then(resp => {
+        if (resp.ok) {
+            return resp.json();
+        } else {
+            throw Error(e);
+        }
+    }).catch(e => console.error(e));
 }
 
 const isLogged = () => !!getCookie('username');
