@@ -51,8 +51,12 @@
         postData("https://api.cardmatching.ovh/tokens", data)
             .then(json => {
                 setCookie('token', json.access_token)
-                setCookie('username', formData.get('username'))
-                window.location = '../index.html';
+                getData('v1/users/me')
+                    .then(json => {
+                        setCookie('username', json.username);
+                        setCookie('uid', json.uid);
+                        window.location = '../index.html';
+                    });
             })
             .catch(e => console.error(e));
     })

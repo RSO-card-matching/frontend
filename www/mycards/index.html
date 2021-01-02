@@ -1,61 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>My Cards</title>
-        <link rel="stylesheet" type="text/css" href="../index.css">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
-        <script src="../main.js"></script>
-    </head>
-    <body>
-        <div class="naslov">
-            <h1 onclick="location.href='..'"">Card matching</h1>
-        </div>
-        <div class="navigation_row">
-            <button class="navigation_element" onclick="location.href='../home';">
-                HOME
-            </button>
-            <button class="navigation_element superbold">
-                MY CARDS
-            </button>
-            <button class="navigation_element" onclick="location.href='../allcards';">
-                ALL CARDS
-            </button>
-            <button class="navigation_element">
-                MATCHES
-            </button>
-            <button class="navigation_element">
-                MESSAGES
-            </button>
-            <button class="navigation_element">
-                LOG OUT
-            </button>
-        </div>
-        <ul class="mycards_list">
+<head>
+    <meta charset="UTF-8">
+    <title>My Cards</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="../main.js"></script>
+</head>
+<body>
+<div class="naslov">
+    <h1 onclick="location.href='..'"">Card matching</h1>
+</div>
+<div class="navigation_row">
+    <button class="navigation_element" onclick="location.href='../home';">
+        HOME
+    </button>
+    <button class="navigation_element superbold">
+        MY CARDS
+    </button>
+    <button class="navigation_element" onclick="location.href='../allcards';">
+        ALL CARDS
+    </button>
+    <button class="navigation_element">
+        MATCHES
+    </button>
+    <button class="navigation_element">
+        MESSAGES
+    </button>
+    <button class="navigation_element">
+        LOG OUT
+    </button>
+</div>
+<ul class="mycards_list" id="my-cards">
+
+</ul>
+</body>
+<script>
+    getData("v1/samples?user_id=" + getCookie('uid'))
+        .then(json => {
+            _id('my-cards').innerHTML = json.map(object => `
             <li class="mycards_item">
-                <p class="mycards_title superbold" style="font-size: 200%">Card Name</p>
-                <p class="mycards_series superbold" style="font-size: 200%">Series</p>
-                <p class="mycards_state superbold" style="font-size: 200%">State</p>
-                <p class="mycards_wts superbold" style="font-size: 200%">For sale</p>
-            </li>
-            <li class="mycards_item">
-                <p class="mycards_title">A card</p>
-                <p class="mycards_series">Cardos</p>
-                <p class="mycards_state">(mint state)</p>
-                <p class="mycards_wts">WTS: no</p>
-            </li>
-            <li class="mycards_item">
-                <p class="mycards_title">Another card</p>
-                <p class="mycards_series">Cardos</p>
-                <p class="mycards_state">(mint state)</p>
-                <p class="mycards_wts">WTS: no</p>
-            </li>
-            <li class="mycards_item">
-                <p class="mycards_title">Superfastinsanekebab</p>
+                <p class="mycards_title">${object.state}</p>
                 <p class="mycards_series">Čokolešnik</p>
-                <p class="mycards_state">(slight use)</p>
+                <p class="mycards_state">${object.state}</p>
                 <p class="mycards_wts">WTS: yes</p>
-            </li>
-        </ul>
-    </body>
+            </li>`);
+        })
+        .catch(e => console.error(e));
+</script>
 </html>

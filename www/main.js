@@ -46,3 +46,5 @@ async function getData(url) {
         }
     }).then(resp => resp.json());
 }
+
+const isLogged = () => !!getCookie('username');

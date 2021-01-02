@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Card matching</title>
-        <link rel="stylesheet" type="text/css" href="index.css">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="naslov">
-            <h1>Card matching</h1>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Card matching</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="naslov">
+    <h1>Card matching</h1>
+</div>
 
-        <div class="button_row">
-            <button class="button" onclick="location.href='./login';">
+<div class="button_row" id="menu">
+
+</div>
+<h1 style="text-align: center">Covid 19 daily stats for Slovenia:</h1>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>New Cases</th>
+        <th>New Deaths</th>
+        <th>Active Cases</th>
+        <th>Critical Cases</th>
+        <th>Recovered Cases</th>
+    </tr>
+    <tr>
+        <td><div id="dateToday"></div></td>
+        <td><div id="newCases"></div></td>
+        <td><div id="deathsToday"></div></td>
+        <td><div id="casesActive"></div></td>
+        <td><div id="casesCritical"></div></td>
+        <td><div id="recoveredAll"></div></td>
+    </tr>
+</table>
+<p>Welcome user: <span id="username"></span></p>
+
+
+</body>
+
+
+<script src="main.js"></script>
+<script>
+    _id('menu').innerHTML = `
+            <button class="button" onclick="location.href='./home';">
+                    Home
+            </button>
+
+            ${!isLogged() ? `<button class="button" onclick="location.href='./login';">
                 Log in
             </button>
-            <button class="button" onclick="location.href='./home';">
-                Home
-            </button>
             <button class="button" onclick="location.href='./register';">
-                Register
-            </button>
-        </div>
-        <h1 style="text-align: center">Covid 19 daily stats for Slovenia:</h1>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>New Cases</th>
-                <th>New Deaths</th>
-                <th>Active Cases</th>
-                <th>Critical Cases</th>
-                <th>Recovered Cases</th>
-            </tr>
-            <tr>
-                <td><div id="dateToday"></div></td>
-                <td><div id="newCases"></div></td>
-                <td><div id="deathsToday"></div></td>
-                <td><div id="casesActive"></div></td>
-                <td><div id="casesCritical"></div></td>
-                <td><div id="recoveredAll"></div></td>
-            </tr>
-        </table>
-    <p>Welcome user: <span id="username"></span></p>
+                    Register
+            </button>` : ''}
 
-
-    </body>
-
-
-    <script src="main.js"></script>
-    <script>
-        fetch("https://covid-193.p.rapidapi.com/statistics?country=Slovenia", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": "210c027a81mshb9a569944c9d1a6p1a26d8jsn48237317e333",
-                "x-rapidapi-host": "covid-193.p.rapidapi.com"
-            }
+            `;
+    fetch("https://covid-193.p.rapidapi.com/statistics?country=Slovenia", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "210c027a81mshb9a569944c9d1a6p1a26d8jsn48237317e333",
+            "x-rapidapi-host": "covid-193.p.rapidapi.com"
+        }
+    })
+        .then(response => response.json())
+        .then(json => {
+            _id('newCases').innerHTML = json.response[0].cases.new
+            _id('dateToday').innerHTML = json.response[0].day
+            _id('deathsToday').innerHTML = json.response[0].deaths.new
+            _id('recoveredAll').innerHTML = json.response[0].cases.recovered
+            _id('casesActive').innerHTML = json.response[0].cases.active
+            _id('casesCritical').innerHTML = json.response[0].cases.critical
         })
-            .then(response => response.json())
-            .then(json => {
-                _id('newCases').innerHTML = json.response[0].cases.new
-                _id('dateToday').innerHTML = json.response[0].day
-                _id('deathsToday').innerHTML = json.response[0].deaths.new
-                _id('recoveredAll').innerHTML = json.response[0].cases.recovered
-                _id('casesActive').innerHTML = json.response[0].cases.active
-                _id('casesCritical').innerHTML = json.response[0].cases.critical
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        .catch(err => {
+            console.error(err);
+        });
 
-        _id('username').innerHTML = getCookie('username')
-    </script>
+    _id('username').innerHTML = getCookie('username')
+</script>
 
 </html>
