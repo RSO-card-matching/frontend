@@ -31,6 +31,29 @@
 <ul class="mycards_list" id="my-cards">
 
 </ul>
+
+<h1 style="text-align: center">Samples</h1>
+<br>
+<form id="form-login" name="form-login" method="post" style="text-align: center;">
+    <label style="color: white">User ID</label>
+    <input type="text" name="user_id" placeholder="ID of user"
+           required="required"/>
+    <label style="color: white">Card ID</label>
+    <input type="text" name="card_id" placeholder="ID of card for sell"
+           required="required"/>
+    <label style="color: white">State</label>
+    <input type="text" name="state" placeholder="State of card"
+           required="required"/>
+    <label style="color: white">WTS</label>
+    <input type="text" name="wts" placeholder="true or false"
+           required="required"/>
+    <br>
+    <input type="submit" name="submit" value="Send message" />
+</form>
+
+<h1 style="text-align: center">Wishes</h1>
+
+
 </body>
 <script>
     function displayCardsData(json) {
@@ -58,5 +81,37 @@
                     displayCardsData(mergeJson)
                 });
         });
+</script>
+<script>
+    async function postData(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            //mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: data // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+    }
+    _id('form-login').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(document.getElementById('form-login'));
+        const data = JSON.stringify(Object.fromEntries(formData));
+        //const object = Object.fromEntries(formData.entries());
+        //console.log(formData);
+        postData("https://api.cardmatching.ovh/v1/samples", data)
+            .then(json => {
+                console.log(json)
+            })
+            .catch(e => console.error(e));
+    })
 </script>
 </html>
