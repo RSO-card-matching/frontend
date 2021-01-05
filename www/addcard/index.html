@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matches</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="../main.js"></script>
+</head>
+<body>
+<div class="naslov">
+    <h1 onclick="location.href='..';"">Card matching</h1>
+</div>
+<div class="navigation_row">
+    <button class="navigation_element">
+        HOME
+    </button>
+    <button class="navigation_element" onclick="location.href='../mycards';">
+        MY CARDS
+    </button>
+    <button class="navigation_element superbold" onclick="location.href='../addcard';">
+        ADD CARD
+    </button>
+    <button class="navigation_element" onclick="location.href='../allcards';">
+        ALL CARDS
+    </button>
+    <button class="navigation_element" onclick="location.href='../messages';">
+        MESSAGES
+    </button>
+    <button class="navigation_element" onclick="location.href='../logout';">
+        LOG OUT
+    </button>
+</div>
+<h1>Add new card</h1>
+<br>
+<form id="form-login" name="form-login" method="post" style="text-align: center;">
+    <label style="color: white">Name of card</label>
+    <input type="text" name="title" placeholder="Name of card"
+           required="required"/>
+    <label style="color: white">Name of series</label>
+    <input type="text" name="series" placeholder="Name of series"
+           required="required"/>
+    <br>
+    <label style="color: white">Manufacturer</label>
+    <input type="text" name="manufacturer" placeholder="Manufacturer"
+           required="required"/>
+    <label style="color: white">Serial number</label>
+    <input type="text" name="serial_num" placeholder="Serial number"/>
+    <br>
+    <br>
+    <input type="submit" name="submit" value="Send my sample to DB" />
+</form>
+</body>
+<script>
+    async function postData(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            //mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: data // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+    }
+    _id('form-login').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(document.getElementById('form-login'));
+        const data = JSON.stringify(Object.fromEntries(formData));
+        //const object = Object.fromEntries(formData.entries());
+        //console.log(formData);
+        postData("https://api.cardmatching.ovh/v1/cards", data)
+            .then(json => {
+                console.log(json)
+            })
+            .catch(e => console.error(e));
+    })
+</script>
+</html>
