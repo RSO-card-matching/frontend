@@ -42,16 +42,14 @@
 <script src="main.js"></script>
 <script>
     _id('menu').innerHTML = `
-            <button class="button" onclick="location.href='./home';">
-                    Home
-            </button>
-
             ${!isLogged() ? `<button class="button" onclick="location.href='./login';">
                 Log in
             </button>
             <button class="button" onclick="location.href='./register';">
                     Register
-            </button>` : ''}
+            </button>` : `<button class="button" onclick="location.href='./home';">
+                    Home
+            </button>`}
 
             `;
     fetch("https://covid-193.p.rapidapi.com/statistics?country=Slovenia", {

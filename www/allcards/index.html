@@ -47,14 +47,29 @@
 </ul>
 </body>
 <script>
-    getData("v1/cards")
+    if (!isLogged()) {
+        location.href = '/';
+    }
+    getData("v1/card-images")
         .then(json => {
-            _id('card-gallery').innerHTML = json.map(object => `
-            <li class="allcards_item">
-                <img class="allcards_thumb" src="placeholder-card-200.png"/>
-                <p class="allcards_title">${object.title}</p>
-                <p class="allcards_series">${object.series}</p>
-            </li>`);
+            const cardIds = json.map(object => object.card_id);
+            const stringIds = cardIds.join(',');
+            getData("v1/cards/" + stringIds)
+                .then(cards => {
+                    const cardsArray = Array.isArray(cards) ? cards : [cards];
+                    const mergeJson = [...json.map(object => {
+                        return {
+                            ...object,
+                            ...cardsArray.find(obj => obj.id === object.card_id)
+                        }
+                    })];
+                    _id('card-gallery').innerHTML = mergeJson.map(object => `
+                            <li class="allcards_item">
+                                <img class="allcards_thumb" src="${object.url}"/>
+                                <p class="allcards_title">${object.title}</p>
+                                <p class="allcards_series">${object.series}</p>
+                            </li>`);
+                });
         })
         .catch(e => console.error(e));
 </script>
